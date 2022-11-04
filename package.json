@@ -1,0 +1,23 @@
+{
+	"name": "mightyohm-geiger-counter-monitor",
+	"version": "1.0.0",
+	"description": "Get data from the MightyOhm Geiger Counter and visualize it",
+	"main": "server.js",
+	"type": "module",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mojoaxel/mightyohm-geiger-counter-monitor.git"
+	},
+	"author": "Alexander Wunschik <dev@wunschik.net>",
+	"license": "AGPL-3.0",
+	"bugs": {
+		"url": "https://github.com/mojoaxel/mightyohm-geiger-counter-monitor/issues"
+	},
+	"homepage": "https://github.com/mojoaxel/mightyohm-geiger-counter-monitor#readme",
+	"dependencies": {
+		"serialport": "^10.4.0"
+	}
+}
