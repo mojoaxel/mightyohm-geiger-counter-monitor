@@ -15,3 +15,5 @@ npm start
 ```
 
 This will start a web-server on http://0.0.0.0:80
+
+To keep the server running after a crash or a reboot use something like `pm2`.

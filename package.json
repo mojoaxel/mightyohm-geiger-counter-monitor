@@ -18,6 +18,8 @@
 	},
 	"homepage": "https://github.com/mojoaxel/mightyohm-geiger-counter-monitor#readme",
 	"dependencies": {
-		"serialport": "^10.4.0"
+		"dayjs": "^1.11.7",
+		"serialport": "^10.4.0",
+		"joy-it-rb-lcd-20x4": "mojoaxel/joy-it-RB-LCD-20x4#main"
 	}
 }
