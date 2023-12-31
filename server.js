@@ -26,14 +26,15 @@ let min = Infinity;
 let max = 0;
 let average;
 
-async function die(err, msg = 'Unknown error') {
+async function die(location, err, msg = 'Unknown error') {
 	await lcd.close();
 	await lcd.clear();
 	//await lcs.close();
 	serialPort.close();
 	server.close();
 	if (err) {
-		console.error(msg, err);
+		const timestamp = (new Date()).toISOString();
+		console.error(`[${timestamp}] ${location}: `, msg, err);
 		process.exit(1);
 	} else {
 		process.exit(0);
@@ -86,7 +87,7 @@ async function initGeigerCounter() {
 		const parser = serialPort.pipe(new ReadlineParser({ delimiter: '\r\n' }))
 		parser.on('data', handleGeigerData);
 	} catch(err) {
-		await die(err);
+		await die('initGeigerCounter', err);
 	}
 }
 
@@ -101,7 +102,7 @@ async function updateDisplay() {
 	try {
 		await lcd.printLines(lines);
 	} catch(err) {
-		await die(err, "Error updating LCD display");
+		await die('updateDisplay', err, "Error updating LCD display");
 	}
 }
 
@@ -114,7 +115,7 @@ async function initLCD() {
 		await lcd.initialize();
 		await lcd.clear();
 	} catch(err) {
-		await die(err, "Error initializing LCD");
+		await die('initLCD', err, "Error initializing LCD");
 	}
 }
 
@@ -136,7 +137,7 @@ async function initServer() {
 			});
 		});
 	} catch(err) {
-		await die(err, "Error starting webserver");
+		await die('initServer', err, "Error starting webserver");
 	}
 }
 
@@ -148,7 +149,7 @@ async function initServer() {
 	// close connections before restarting with nodemon
 	['SIGUSR2'].forEach(signal => {
 		process.on(signal, async () => {
-			await die();
+			await die('main');
 		})
 	})
 })();
